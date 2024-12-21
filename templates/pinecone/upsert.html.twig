@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Upsert Vectors for {{ indexName }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Upsert Vectors for {{ indexName }}</h1>
+        <div class="card p-4">
+            {{ form_start(form) }}
+            <div class="form-group mb-3">
+                {{ form_label(form.indexHost) }}
+                {{ form_widget(form.indexHost, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form_label(form.namespace) }}
+                {{ form_widget(form.namespace, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form_label(form.vectors) }}
+                {{ form_widget(form.vectors, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.upsert, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

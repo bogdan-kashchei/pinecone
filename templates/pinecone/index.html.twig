@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pinecone Indexes{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Pinecone Indexes</h1>
+        <a href="{{ path('pinecone_create') }}" class="btn btn-primary mb-4">Create New Index</a>
+        <div class="list-group">
+            {% for index in indexes %}
+                <div class="list-group-item mb-3">
+                    <h5 class="mb-1">{{ index.name }}</h5>
+                    <p class="mb-1"><strong>Metric:</strong> {{ index.metric }}</p>
+                    <p class="mb-1"><strong>Dimension:</strong> {{ index.dimension }}</p>
+                    <p class="mb-1"><strong>Status:</strong> {{ index.status.state }} (Ready: {{ index.status.ready ? 'Yes' : 'No' }})</p>
+                    <p class="mb-1"><strong>Host:</strong> {{ index.host }}</p>
+                    <p class="mb-1"><strong>Spec:</strong> Region: {{ index.spec.serverless.region }}, Cloud: {{ index.spec.serverless.cloud }}</p>
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="{{ path('pinecone_view', {'indexName': index.name}) }}" class="btn btn-secondary">View</a>
+                        <a href="{{ path('pinecone_delete', {'indexName': index.name}) }}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

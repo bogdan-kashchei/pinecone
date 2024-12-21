@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Pinecone Index{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center">View Pinecone Index</h1>
+
+        <div class="card p-4">
+            <h2>Index Details</h2>
+            <p><strong>Name:</strong> {{ indexDetails.name }}</p>
+            <p><strong>Metric:</strong> {{ indexDetails.metric }}</p>
+            <p><strong>Dimension:</strong> {{ indexDetails.dimension }}</p>
+            <p><strong>Status:</strong> {{ indexDetails.status.state }}</p>
+            <p><strong>Ready:</strong> {{ indexDetails.status.ready ? 'Yes' : 'No' }}</p>
+            <p><strong>Host:</strong> {{ indexDetails.host }}</p>
+            <p><strong>Region:</strong> {{ indexDetails.spec.serverless.region }}</p>
+            <p><strong>Cloud:</strong> {{ indexDetails.spec.serverless.cloud }}</p>
+        </div>
+    </div>
+{% endblock %}

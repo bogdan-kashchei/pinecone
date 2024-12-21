@@ -1,0 +1,7 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+pinecone_bundle:
+    resource: '../src/PineconeBundle/Controller/'
+    type: attribute

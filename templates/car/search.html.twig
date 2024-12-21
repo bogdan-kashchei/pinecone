@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Car{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center">Search Car</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_row(form.query, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.search, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        {% if results %}
+            <h2 class="text-center mt-5">Results</h2>
+            <table class="table table-striped mt-3">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Score</th>
+                    <th>Metadata</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for match in results.matches %}
+                    <tr>
+                        <td>{{ match.id }}</td>
+                        <td>{{ match.score }}</td>
+                        <td>
+                            <div class="card">
+                                {% if match.metadata.image is defined %}
+                                    <img src="{{ asset('uploads/images/' ~ match.metadata.image) }}" class="card-img-top" alt="Car Image">
+                                {% endif %}                                <div class="card-body">
+                                    <h5 class="card-title">Car Details</h5>
+                                    <p class="card-text">
+                                        <strong>VIN:</strong> {{ match.metadata.vin }}<br>
+                                        <strong>Name:</strong> {{ match.metadata.name }}<br>
+                                        <strong>Year:</strong> {{ match.metadata.year }}<br>
+                                        <strong>Type:</strong> {{ match.metadata.type }}<br>
+                                        <strong>Description:</strong> {{ match.metadata.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center">Vector Embeddings</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_row(form.query, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.search, {'attr': {'class': 'btn btn-primary '}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        {% if results %}
+            <h2 class="text-center mt-5">Results</h2>
+            <table class="table table-striped mt-3">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Score</th>
+                    <th>Metadata</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for match in results.matches %}
+                    <tr>
+                        <td>{{ match.id }}</td>
+                        <td>{{ match.score }}</td>
+                        <td>{{ match.metadata.text }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
